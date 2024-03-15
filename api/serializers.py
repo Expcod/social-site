@@ -36,7 +36,7 @@ class FollowerSerializer(serializers.ModelSerializer):
         depth=1
 
 class ChatListSerializer(serializers.ModelSerializer):
-    last_message = serializers.MassageSerializer(read_only=True)
+    last_message = MessageSerializer(read_only=True)
     class Meta:
         model = Chat
         fields = ['id', 'last_message', 'unread_messages', 'users']

@@ -1,7 +1,7 @@
 from django.contrib import admin
 from . import models
 
-admin.site.register(models.MyModel)
+
 admin.site.register(models.User)
 admin.site.register(models.UserReletion)
 admin.site.register(models.Chat)
