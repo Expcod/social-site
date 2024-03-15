@@ -25,7 +25,20 @@ class Chat(models.Model):
     def save(self, *args, **kwargs):
         if len(self.users) > 2:
             raise AssertionError('Bu shaxsiy')
-        super(Chat, self).save(*args, **kwargs)
+        super(Chat, self).save(*args, **kwargs)@property
+    def last_message(self):
+        message = Message.objects.filter(chat = self).last()
+        return message
+    
+    @property
+    def unread_messages(self):
+        quantity = Message.objects.filter(
+            chat = self,
+            is_read = False
+            ).count()
+        return quantity
+    
+
 
 
 class Message(models.Model):
@@ -71,7 +84,3 @@ class Like(models.Model):
     post = models.ForeignKey(Post, on_delete=models.CASCADE)
     status = models.BooleanField()
 
-
-class MyModel(models.Model):
-    title = models.CharField(max_length=255)
-    is_bool = models.BooleanField(default=True)
